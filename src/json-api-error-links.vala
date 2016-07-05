@@ -1,4 +1,4 @@
-public class Json.Api.ErrorLinks : Json.Api.Object
+public class Json.Api.ErrorLinks : Json.Api.Links
 {
 	public Link about { get; construct set; }
 

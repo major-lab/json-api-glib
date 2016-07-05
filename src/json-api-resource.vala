@@ -7,8 +7,8 @@ public class Json.Api.Resource : Json.Api.Object
 	public HashTable<string, Relationship>? relationships { get; construct set; default = null; }
 	public Links?                           links         { get; construct set; default = null; }
 
-	public Resource (string                           data_type,
-	                 string                           id,
+	public Resource (string                           id,
+	                 string                           data_type,
 	                 Json.Object                      attributes,
 	                 HashTable<string, Relationship>? relationships = null,
 	                 Links?                           links         = null,

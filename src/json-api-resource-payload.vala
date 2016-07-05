@@ -2,8 +2,8 @@ public class Json.Api.ResourcePayload : Json.Api.Payload
 {
 	public Resource data { get; construct set; }
 
-	public ResourcePayload (Links links, Resource data)
+	public ResourcePayload (Resource data, PayloadLinks links, Json.Object? meta = null)
 	{
-		GLib.Object (links: links, data: data);
+		GLib.Object (data: data, links: links, meta: meta);
 	}
 }

@@ -1,19 +1,12 @@
 public class Json.Api.Links : Json.Api.Object
 {
-	public Link self { get; construct set; }
-
-	public Links (Link self)
-	{
-		GLib.Object (self: self);
-	}
-
 	public override Node serialize_property (string property_name, Value @value, ParamSpec pspec)
 	{
 		if (@value.type ().is_a (typeof (Link)))
 		{
 			var link = @value as Link;
 
-			if (link.meta == null)
+			if (link != null && link.meta == null)
 			{
 				var node = new Node (NodeType.VALUE);
 				node.set_string (link.href);
