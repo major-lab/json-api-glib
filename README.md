@@ -1,4 +1,4 @@
-# Json-Api-GLib
+# JSON-API-GLib
 
 Implementation of the [JSON API](http://jsonapi.org/) 1.0 specification for
 GLib.
