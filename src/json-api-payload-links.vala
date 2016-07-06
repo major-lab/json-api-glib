@@ -7,5 +7,4 @@ public class Json.Api.PayloadLinks : Json.Api.Links
 	{
 		GLib.Object (self: self, related: related);
 	}
-
 }

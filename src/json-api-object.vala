@@ -29,16 +29,19 @@ public abstract class Json.Api.Object : GLib.Object, Json.Serializable
 		{
 			unowned SList<GLib.Object> slist_value = @value as SList<GLib.Object>;
 
-			var array = new Array.sized (slist_value.length ());
-
-			foreach (var item in slist_value)
+			if (slist_value != null || property_name == "data")
 			{
-				array.add_element (gobject_serialize (item));
-			}
+				var array = new Array.sized (slist_value.length ());
 
-			var node = new Node (NodeType.ARRAY);
-			node.set_array (array);
-			return node;
+				foreach (var item in slist_value)
+				{
+					array.add_element (gobject_serialize (item));
+				}
+
+				var node = new Node (NodeType.ARRAY);
+				node.set_array (array);
+				return node;
+			}
 		}
 		else if (@value.type ().is_a (typeof (HashTable)))
 		{
