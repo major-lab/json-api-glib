@@ -26,4 +26,18 @@ public class Json.Api.ResourcesPayload : Json.Api.Payload
 		// FIXME: compiler bug with (owned) construct
 		this.data = (owned) data;
 	}
+
+	public override Json.Node serialize_property (string property_name, Value @value, ParamSpec pspec)
+	{
+		var node = base.serialize_property (property_name, @value, pspec);
+		if (property_name == "data")
+		{
+			node.get_array ().foreach_element ((array, index, element_node) => {
+				var data_type = element_node.get_object ().get_string_member ("data-type");
+				element_node.get_object ().set_string_member ("type", data_type);
+				element_node.get_object ().remove_member ("data-type");
+			});
+		}
+		return node;
+	}
 }
