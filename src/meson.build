@@ -12,7 +12,6 @@ json_api_glib_sources = [
     'json-api-relationship-links.vala',
     'json-api-relationship.vala',
     'json-api-resource-payload.vala',
-    'json-api-resource-links.vala',
     'json-api-resource.vala',
     'json-api-resources-payload.vala']
 json_api_glib_lib = library('json-api-glib', json_api_glib_sources,
