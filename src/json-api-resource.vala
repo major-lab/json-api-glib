@@ -18,14 +18,14 @@
 
 public class Json.Api.Resource : Json.Api.Object
 {
-	public string data_type { get; construct set; }
-	public string id        { get; construct set; }
+	public string  data_type { get; construct set; }
+	public string? id        { get; construct set; }
 
 	public Json.Object?                     attributes    { get; construct set; default = null; }
 	public HashTable<string, Relationship>? relationships { get; construct set; default = null; }
 	public Links?                           links         { get; construct set; default = null; }
 
-	public Resource (string                           id,
+	public Resource (string?                          id,
 	                 string                           data_type,
 	                 Json.Object?                     attributes    = null,
 	                 HashTable<string, Relationship>? relationships = null,
