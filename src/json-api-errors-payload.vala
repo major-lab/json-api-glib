@@ -16,24 +16,13 @@
  * along with JSON-API-GLib.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Json.Api.ResourcePayload : Json.Api.DataPayload
+public class Json.Api.ErrorsPayload : Json.Api.Payload
 {
-	public Resource? data { get; construct set; }
+	public SList<Error> errors { get; owned set; }
 
-	public ResourcePayload (Resource? data, PayloadLinks? links = null, Json.Object? meta = null)
+	public ErrorsPayload (owned SList<Error> errors, PayloadLinks? links = null)
 	{
-		GLib.Object (data: data, links: links, meta: meta);
-	}
-
-	public override Json.Node serialize_property (string property_name, Value @value, ParamSpec pspec)
-	{
-		var node = base.serialize_property (property_name, @value, pspec);
-		if (property_name == "data")
-		{
-			var data_type = node.get_object ().get_string_member ("data-type");
-			node.get_object ().set_string_member ("type", data_type);
-			node.get_object ().remove_member ("data-type");
-		}
-		return node;
+		GLib.Object (links: links);
+		this.errors = (owned) errors;
 	}
 }

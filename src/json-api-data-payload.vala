@@ -16,24 +16,7 @@
  * along with JSON-API-GLib.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Json.Api.ResourcePayload : Json.Api.DataPayload
+public abstract class Json.Api.DataPayload : Json.Api.Payload
 {
-	public Resource? data { get; construct set; }
-
-	public ResourcePayload (Resource? data, PayloadLinks? links = null, Json.Object? meta = null)
-	{
-		GLib.Object (data: data, links: links, meta: meta);
-	}
-
-	public override Json.Node serialize_property (string property_name, Value @value, ParamSpec pspec)
-	{
-		var node = base.serialize_property (property_name, @value, pspec);
-		if (property_name == "data")
-		{
-			var data_type = node.get_object ().get_string_member ("data-type");
-			node.get_object ().set_string_member ("type", data_type);
-			node.get_object ().remove_member ("data-type");
-		}
-		return node;
-	}
+	public SList<Resource>? included { get; owned set; default = null; }
 }

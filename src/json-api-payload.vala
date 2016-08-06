@@ -16,20 +16,8 @@
  * along with JSON-API-GLib.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Json.Api.Payload : Json.Api.Object
+public abstract class Json.Api.Payload : Json.Api.Object
 {
-	public SList<Error>?    errors   { get; owned     set; default = null; }
-	public JsonApi?         jsonapi  { get; construct set; default = null; }
-	public PayloadLinks     links    { get; construct set;                 }
-
-	public Payload.from_jsonapi (JsonApi jsonapi, PayloadLinks links)
-	{
-		GLib.Object (jsonapi: jsonapi, links: links);
-	}
-
-	public Payload.from_errors (owned SList<Error> errors, PayloadLinks links)
-	{
-		GLib.Object (links: links);
-		this.errors = (owned) errors;
-	}
+	public JsonApi?      jsonapi { get; construct set; default = null; }
+	public PayloadLinks? links   { get; construct set; default = null; }
 }
