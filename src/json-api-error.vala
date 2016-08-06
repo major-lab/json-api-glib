@@ -18,19 +18,19 @@
 
 public class Json.Api.Error : Json.Api.Object
 {
-	public string       id      { get; construct set;                 }
-	public ErrorLinks   links   { get; construct set;                 }
-	public string       status  { get; construct set;                 }
-	public string       code    { get; construct set;                 }
-	public string       title   { get; construct set;                 }
+	public string?      id      { get; construct set; default = null; }
+	public ErrorLinks?  links   { get; construct set; default = null; }
+	public string?      status  { get; construct set; default = null; }
+	public string?      code    { get; construct set; default = null; }
+	public string?      title   { get; construct set; default = null; }
 	public string?      details { get; construct set; default = null; }
 	public ErrorSource? source  { get; construct set; default = null; }
 
-	public Error (string       id,
-	              ErrorLinks   links,
-	              string       status,
-	              string       code,
-	              string       title,
+	public Error (string?      id      = null,
+	              ErrorLinks?  links   = null,
+	              string?      status  = null,
+	              string?      code    = null,
+	              string?      title   = null,
 	              string?      details = null,
 	              ErrorSource? source  = null)
 	{
