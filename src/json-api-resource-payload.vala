@@ -18,7 +18,8 @@
 
 public class Json.Api.ResourcePayload : Json.Api.Payload
 {
-	public Resource? data { get; construct set; }
+	public Resource?        data     { get; construct set;                 }
+	public SList<Resource>? included { get; owned     set; default = null; }
 
 	public ResourcePayload (Resource? data, PayloadLinks links, Json.Object? meta = null)
 	{
