@@ -9,7 +9,7 @@ JSON-GLib by sharing a common root namespace and generating `Json.Node`
 objects.
 
 If you are using [Valum](https://github.com/valum-framework/valum/), the
-following code should give you a good idea of how to build an app.
+following sample should give you a good idea of how to build an app:
 
 ```vala
 using Json;
@@ -17,13 +17,16 @@ using Valum;
 
 app.use (accept ("application/vnd.api+json"));
 
-app.get ("/", (req, res) => {
-    var generator = new Generator ();
+app.get ("/users/<int:id>", (req, res, next, ctx) => {
+    var id = ctx["id"].get_string ();
+    
+    var payload = new ResourcePayload (new Resource (id, 
+                                                     "user", 
+                                                     Json.gobject_serialize (User.from_id (id))),
+                                       new PayloadLinks (new Link ("/users/%s".printf (id));
 
-    generator.root   = gobject_serialize (new Api.Payload ());
-    generator.pretty = false;
-
-    return generator.to_stream (res.body);
+    size_t length;
+    return res.expand_utf8 (Json.gobject_to_data (payload, out length));
 });
 ```
 
