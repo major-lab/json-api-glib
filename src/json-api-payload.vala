@@ -22,4 +22,15 @@ public class Json.Api.Payload : Json.Api.Object
 	public JsonApi?         jsonapi  { get; construct set; default = null; }
 	public PayloadLinks     links    { get; construct set;                 }
 	public SList<Resource>? included { get; owned     set; default = null; }
+
+	public Payload.from_jsonapi (JsonApi jsonapi, PayloadLinks links)
+	{
+		GLib.Object (jsonapi: jsonapi, links: links);
+	}
+
+	public Payload.from_errors (owned SList<Error> errors, PayloadLinks links)
+	{
+		GLib.Object (links: links);
+		this.errors = (owned) errors;
+	}
 }
