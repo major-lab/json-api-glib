@@ -18,7 +18,8 @@ json_api_glib_sources = [
     'json-api-resource.vala',
     'json-api-resources-payload.vala']
 json_api_glib_lib = library('json-api-glib', json_api_glib_sources,
-                            vala_args: ['--vapidir=' + meson.current_source_dir() + '/..'],
-                            dependencies: [glib, gobject, json])
+                            vala_args: ['--vapidir', join_paths(meson.current_source_dir(), '..')],
+                            dependencies: [glib_dep, gobject_dep, json_glib_dep])
 
-json_api_glib = declare_dependency(link_with: json_api_glib_lib, include_directories: include_directories('.'))
+json_api_glib_dep = declare_dependency(link_with: json_api_glib_lib,
+                                       include_directories: include_directories('.'))
