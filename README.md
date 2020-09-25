@@ -15,15 +15,23 @@ following sample should give you a good idea of how to build an app:
 using Json;
 using Valum;
 
+public class User : GLib.Object {
+    public string id { get; construct set; }
+    public User.from_id (string id)
+    {
+        GLib.Object (id: id);
+    }
+}
+
 app.use (accept ("application/vnd.api+json"));
 
 app.get ("/users/<int:id>", (req, res, next, ctx) => {
     var id = ctx["id"].get_string ();
-    
-    var payload = new ResourcePayload (new Resource (id, 
-                                                     "user", 
-                                                     Json.gobject_serialize (User.from_id (id))),
-                                       new PayloadLinks (new Link ("/users/%s".printf (id));
+
+    var payload = new ResourcePayload (new Json.Api.Resource (id,
+                                       "user",
+                                       Json.gobject_serialize (new User.from_id (id)).get_object ()),
+                                       new PayloadLinks (new Link ("/users/%s".printf (id))));
 
     size_t length;
     return res.expand_utf8 (Json.gobject_to_data (payload, out length));
